@@ -1,0 +1,334 @@
+<title>Product Design Library</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout concept: a drafting-desk index. Left, stage cards in running order; right, the tree for the open stage.
+   Consolidated skill is the parent row; its steps and the original skills it was built from are the children. */
+:root {
+  --bg: #EDF0F2; --surface: #FAFBFC; --soft: #E3E8EC; --ink: #122028; --muted: #566771; --line: #D2DAE0;
+  --accent: #1F4FD8; --accent-soft: #DDE6FB; --good: #1E7A4C; --warn: #9A5B00; --bad: #B3341F;
+  --font-display: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F161B; --surface: #17212A; --soft: #1F2C36; --ink: #E6ECF0; --muted: #93A4AF; --line: #2A3946;
+    --accent: #7F9DFF; --accent-soft: #1E2A4A; --good: #5CC48D; --warn: #E0A23C; --bad: #F0806C; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F161B; --surface: #17212A; --soft: #1F2C36; --ink: #E6ECF0; --muted: #93A4AF; --line: #2A3946;
+  --accent: #7F9DFF; --accent-soft: #1E2A4A; --good: #5CC48D; --warn: #E0A23C; --bad: #F0806C; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1260px; margin-inline: auto; display: flex; flex-direction: column; gap: 20px; }
+header { display: flex; flex-direction: column; gap: 14px; }
+h1 { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; margin: 0; letter-spacing: -0.02em; font-weight: 700; text-wrap: balance; }
+.sub { color: var(--muted); margin: 6px 0 0; max-width: 68ch; }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; color: var(--muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px; cursor: pointer; margin-bottom: -1px; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+.search { max-width: 520px; }
+.search label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+.search input { width: 100%; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.layout { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 980px) {
+  .layout { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+  .panel { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+}
+.layout.solo { grid-template-columns: minmax(0, 1fr); }
+.layout.solo .panel { position: static; max-height: none; max-width: 820px; }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); align-content: start; }
+.card { text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.card:hover { border-color: var(--muted); }
+.card[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.step { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.card h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.25; }
+.card p { margin: 0; font-size: 13px; color: var(--muted); }
+.meta { display: flex; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: auto; font-variant-numeric: tabular-nums; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-size: 1.35rem; margin: 0; line-height: 1.2; letter-spacing: -0.01em; }
+.panel h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 20px 0 6px; }
+.phead { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: 13px; }
+.facts dt { color: var(--muted); } .facts dd { margin: 0; overflow-wrap: anywhere; }
+code, .mono { font-family: var(--font-mono); font-size: 12px; }
+code { background: var(--soft); padding: 2px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
+.btn:hover { border-color: var(--muted); }
+.muted { color: var(--muted); }
+details.node { border-top: 1px solid var(--line); }
+details.node:last-of-type { border-bottom: 1px solid var(--line); }
+details.node > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 16px 28px minmax(0, 1fr) auto; gap: 8px; align-items: start; padding: 10px 0; }
+details.node > summary::-webkit-details-marker { display: none; }
+.chev { width: 16px; height: 16px; position: relative; margin-top: 3px; }
+.chev::before { content: ""; position: absolute; inset: 4px 5px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform 0.12s; }
+details[open] > summary .chev::before { transform: rotate(45deg); inset: 3px 5px 5px; }
+.num { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.ntitle { font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.nsub { font-size: 13px; color: var(--muted); }
+.count { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 3px; white-space: nowrap; }
+.body { padding: 0 0 14px 52px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.grp { border-left: 2px solid var(--line); padding-left: 12px; display: flex; flex-direction: column; gap: 4px; }
+.glabel { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.grp ol, .grp ul { margin: 0; padding-left: 18px; }
+.grp li { margin: 2px 0; }
+.child { display: flex; flex-direction: column; }
+.child small { color: var(--muted); }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); margin-right: 4px; white-space: nowrap; }
+.tag.post { background: var(--soft); color: var(--muted); }
+a { color: var(--accent); }
+.pipe { display: flex; flex-direction: column; gap: 0; }
+.pstep { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; }
+.prail { display: flex; flex-direction: column; align-items: center; }
+.pdot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center; font-family: var(--font-mono); font-size: 12px; color: var(--accent); background: var(--surface); }
+.pline { flex: 1; width: 2px; background: var(--line); min-height: 12px; }
+.pbody { padding-bottom: 14px; min-width: 0; }
+.gate { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; color: var(--warn); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; margin-top: 6px; }
+.gate::before { content: ""; width: 8px; height: 8px; border: 2px solid var(--warn); border-radius: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font: inherit; font-size: 12px; color: var(--ink); background: var(--soft); border: 0; border-radius: 6px; padding: 3px 8px; cursor: pointer; }
+.chip:hover { background: var(--accent-soft); color: var(--accent); }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.empty { color: var(--muted); padding: 16px 0; }
+.foot { color: var(--muted); font-size: 12px; }
+@media (max-width: 560px) {
+  details.node > summary { grid-template-columns: 16px minmax(0, 1fr); }
+  details.node > summary .num, details.node > summary .count { grid-column: 2; padding-top: 0; }
+  .body { padding-left: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .chev::before { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Product Design Library</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="search">
+      <label for="q">Search skills, steps and original sources</label>
+      <input id="q" type="search" placeholder="for example: tokens, interview, escalation" autocomplete="off">
+    </div>
+  </header>
+  <div class="layout">
+    <div class="grid" id="grid"></div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+const DATA = /*DATA*/;
+(function () {
+  const first = (s) => (s.steps.length ? s.steps[0] : 99);
+  const stages = DATA.stages.slice().sort((a, b) => first(a) - first(b));
+  const skills = DATA.skills, originals = DATA.originals, repos = DATA.repos;
+  const posts = Object.fromEntries(DATA.posts.map((p) => [p.id, p]));
+  const orig = Object.fromEntries(originals.map((o) => [o.key, o]));
+  const VIEWS = [["stages", "By stage"], ["pipeline", "Run a brief"], ["sources", "By source"], ["backlog", "Not yet read"]];
+  const state = { view: "stages", sel: null, q: "" };
+
+  function el(tag, props) {
+    const e = document.createElement(tag);
+    for (const k in (props || {})) {
+      const v = props[k];
+      if (k === "class") e.className = v;
+      else if (k === "text") e.textContent = v;
+      else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v);
+    }
+    for (let i = 2; i < arguments.length; i++) [].concat(arguments[i]).forEach((c) => { if (c != null) e.append(c.nodeType ? c : document.createTextNode(c)); });
+    return e;
+  }
+  const link = (href, text) => el("a", { href: href, target: "_blank", rel: "noopener noreferrer", text: text });
+  const stageOf = (id) => stages.find((s) => s.id === id) || { title: id };
+  const skillsIn = (id) => skills.filter((s) => s.stage === id).sort((a, b) => a.order - b.order);
+  const further = (id) => originals.filter((o) => o.stage === id && !o.used_by.length);
+  const usedCount = (id) => new Set(skillsIn(id).flatMap((s) => s.draws_on.filter((d) => orig[d]))).size;
+
+  function header() {
+    const nOrig = originals.length, used = originals.filter((o) => o.used_by.length).length;
+    document.getElementById("sub").textContent = skills.length + " consolidated skills across " + stages.length + " stages, rewritten from " + used +
+      " of " + nOrig + " original skills in " + Object.keys(repos).length + " repositories and " + DATA.posts.length + " posts. Open a stage to see its skills; open a skill to see its steps and where it came from.";
+    document.getElementById("foot").textContent = "Generated from index.json on " + DATA.generated + ". Edit the skill files, then run tools/build_repo.py.";
+    const t = document.getElementById("tabs"); t.textContent = "";
+    VIEWS.forEach(([id, label]) => t.append(el("button", { class: "tab", role: "tab", type: "button", id: "tab-" + id, "aria-selected": String(state.view === id),
+      onclick: () => go(id, null), text: label })));
+  }
+
+  function card(id, top, title, desc, meta, pressed, onclick) {
+    return el("button", { class: "card", type: "button", id: "card-" + id, "aria-pressed": String(pressed), onclick: onclick },
+      el("div", { class: "top" }, el("h3", { text: title }), top ? el("span", { class: "step", text: top }) : null),
+      el("p", { text: desc }), el("div", { class: "meta" }, meta.map((m) => el("span", { text: m }))));
+  }
+
+  function grid() {
+    const g = document.getElementById("grid"); g.textContent = ""; g.hidden = false;
+    if (state.view === "stages") {
+      stages.forEach((s) => g.append(card(s.id, s.steps.length ? "step " + s.steps.join(" & ") : "support", s.title, s.purpose,
+        [skillsIn(s.id).length + " skills", usedCount(s.id) + " originals", further(s.id).length + " more"], state.sel === s.id, () => select(s.id))));
+    } else if (state.view === "sources") {
+      Object.entries(repos).forEach(([k, r]) => {
+        const mine = originals.filter((o) => o.repo === k);
+        g.append(card(k, r.licence, k, r.author + ". " + r.summary, [mine.length + " skills read", mine.filter((o) => o.used_by.length).length + " used"], state.sel === k, () => select(k)));
+      });
+      g.append(card("posts", null, "Posts and articles", "LinkedIn posts, articles and sites from the WhatsApp collection.", [DATA.posts.length + " sources"], state.sel === "posts", () => select("posts")));
+    } else { g.hidden = true; }
+    document.querySelector(".layout").classList.toggle("solo", g.hidden);
+  }
+
+  function setAll(open) { document.querySelectorAll("#panel details.node").forEach((d) => { d.open = open; }); }
+  const toolbar = () => el("div", { class: "row" }, el("button", { class: "btn", type: "button", onclick: () => setAll(true), text: "Expand all" }),
+    el("button", { class: "btn", type: "button", onclick: () => setAll(false), text: "Collapse all" }));
+
+  function originLine(key) {
+    if (posts[key]) { const p = posts[key]; return el("li", { class: "child" }, el("span", null, el("span", { class: "tag post", text: key }), link(p.url, p.title)), el("small", { text: p.author + ". Read: " + p.status })); }
+    const o = orig[key]; if (!o) return el("li", { text: key });
+    return el("li", { class: "child" }, el("span", null, el("span", { class: "tag", text: o.repo }), link(o.url, o.name)), el("small", { text: o.desc }));
+  }
+
+  function skillNode(s, showStage) {
+    const body = el("div", { class: "body" }, el("p", { style: "margin:0;max-width:70ch", text: s.summary }),
+      el("dl", { class: "facts" }, el("dt", { text: "Use when" }), el("dd", { text: s.fires_when }),
+        el("dt", { text: "Reads" }), el("dd", null, s.inputs.length ? s.inputs.join("; ") : "the brief"),
+        el("dt", { text: "Writes" }), el("dd", null, el("code", { text: s.output })),
+        el("dt", { text: "File" }), el("dd", null, el("code", { text: s.file }))));
+    if (s.steps.length) body.append(el("div", { class: "grp" }, el("div", { class: "glabel", text: "Steps" }), el("ol", null, s.steps.map((t) => el("li", { text: t.length > 160 ? t.slice(0, 157) + "..." : t })))));
+    body.append(el("div", { class: "grp" }, el("div", { class: "glabel", text: "Built from" }), el("ul", { style: "list-style:none;padding:0;display:flex;flex-direction:column;gap:6px" }, s.draws_on.map(originLine))));
+    return el("details", { class: "node" },
+      el("summary", null, el("span", { class: "chev" }), el("span", { class: "num", text: String(s.order).padStart(2, "0") }),
+        el("div", null, el("div", { class: "ntitle", text: s.name }), el("div", { class: "nsub", text: showStage ? stageOf(s.stage).title : s.slug })),
+        el("span", { class: "count", text: s.draws_on.length + " sources" })), body);
+  }
+
+  function stagePanel(p, id) {
+    const s = stageOf(id), list = skillsIn(id), more = further(id);
+    p.append(el("div", { class: "phead" }, el("h2", { text: s.title }), el("div", { class: "muted", text: s.purpose }),
+      el("dl", { class: "facts" }, el("dt", { text: "Folder" }), el("dd", null, el("code", { text: id + "/" })),
+        el("dt", { text: "Writes" }), el("dd", { text: s.output }), el("dt", { text: "Gate" }), el("dd", { text: s.gates.length ? s.gates.map((g) => g.gate).join(", ") : "None (support stage)" }),
+        el("dt", { text: "Run alone" }), el("dd", { text: s.alone })), toolbar()));
+    list.forEach((k) => p.append(skillNode(k, false)));
+    s.gates.forEach((g) => { p.append(el("h4", { text: "Gate " + g.gate + " (" + g.title + ")" })); p.append(el("ul", { style: "margin:0;padding-left:18px" }, g.checks.map((c) => el("li", { text: c })))); });
+    if (more.length) {
+      p.append(el("h4", { text: "More skills in the originals (" + more.length + ")" }));
+      p.append(el("details", { class: "node" }, el("summary", null, el("span", { class: "chev" }), el("span", { class: "num", text: "+" }),
+        el("div", null, el("div", { class: "ntitle", text: "Not rewritten here" }), el("div", { class: "nsub", text: "Specialist or covered by a consolidated skill. Use directly for depth." })),
+        el("span", { class: "count", text: String(more.length) })),
+        el("div", { class: "body" }, el("ul", { style: "list-style:none;padding:0;display:flex;flex-direction:column;gap:6px" }, more.map((o) => originLine(o.key))))));
+    }
+  }
+
+  function sourcePanel(p, key) {
+    if (key === "posts") {
+      p.append(el("div", { class: "phead" }, el("h2", { text: "Posts and articles" }), el("div", { class: "muted", text: "Each post, and the consolidated skills it informed." }), toolbar()));
+      DATA.posts.forEach((po, i) => {
+        const users = skills.filter((s) => s.draws_on.includes(po.id));
+        p.append(el("details", { class: "node" }, el("summary", null, el("span", { class: "chev" }), el("span", { class: "num", text: po.id.slice(1) }),
+          el("div", null, el("div", { class: "ntitle", text: po.title }), el("div", { class: "nsub", text: po.author })), el("span", { class: "count", text: po.quality })),
+          el("div", { class: "body" }, el("p", { style: "margin:0", text: po.gist }), link(po.url, "Open source"),
+            el("div", { class: "grp" }, el("div", { class: "glabel", text: "Used in" }), users.length ? el("div", { class: "chips" }, users.map((u) => el("button", { class: "chip", type: "button", text: u.name, onclick: () => go("stages", u.stage) }))) : el("span", { class: "muted", text: "Not used in a skill; kept in the register." })))));
+      });
+      return;
+    }
+    const r = repos[key], mine = originals.filter((o) => o.repo === key);
+    p.append(el("div", { class: "phead" }, el("h2", { text: key }), el("div", { class: "muted", text: r.author + " (" + r.licence + "). " + r.summary }), el("div", null, link(r.url, "Open repository")), toolbar()));
+    const groups = {}; mine.forEach((o) => { (groups[o.name.startsWith("layers") ? "layers" : (o.key.split("/")[1])] = groups[o.name.startsWith("layers") ? "layers" : (o.key.split("/")[1])] || []).push(o); });
+    Object.entries(groups).forEach(([plugin, items], i) => {
+      p.append(el("details", { class: "node" }, el("summary", null, el("span", { class: "chev" }), el("span", { class: "num", text: String(i + 1).padStart(2, "0") }),
+        el("div", null, el("div", { class: "ntitle", text: plugin }), el("div", { class: "nsub", text: items.filter((o) => o.used_by.length).length + " of " + items.length + " used" })), el("span", { class: "count", text: String(items.length) })),
+        el("div", { class: "body" }, el("ul", { style: "list-style:none;padding:0;display:flex;flex-direction:column;gap:8px" }, items.map((o) => el("li", { class: "child" },
+          el("span", null, link(o.url, o.name)), el("small", { text: o.desc }),
+          o.used_by.length ? el("div", { class: "chips" }, o.used_by.map((u) => { const sk = skills.find((s) => s.id === u); return el("button", { class: "chip", type: "button", text: sk ? sk.name : u, onclick: () => go("stages", sk ? sk.stage : null) }); }))
+            : el("small", { text: o.stage ? "Listed under " + stageOf(o.stage).title + " as a further skill" : "Out of scope" })))))));
+    });
+  }
+
+  function pipelinePanel(p) {
+    p.append(el("div", { class: "phead" }, el("h2", { text: "Run a brief end to end" }),
+      el("div", { class: "muted", text: "Each step reads the hand-off file before it and writes its own. A person passes each gate before the next step starts. Full instructions: playbooks/run-brief.md. For one stage only: playbooks/run-one-stage.md." })));
+    const pipe = el("div", { class: "pipe" });
+    DATA.pipeline.forEach((st, i, arr) => {
+      const ks = st.skills.map((k) => skills.find((s) => s.id === (k.indexOf("/") > -1 ? k : st.stage + "/" + k))).filter(Boolean);
+      pipe.append(el("div", { class: "pstep" }, el("div", { class: "prail" }, el("span", { class: "pdot", text: String(st.step) }), i < arr.length - 1 ? el("span", { class: "pline" }) : null),
+        el("div", { class: "pbody" }, el("div", { class: "ntitle", text: st.title }), el("div", { class: "nsub" }, stageOf(st.stage).title + " \u00B7 writes ", el("code", { text: st.writes })),
+          el("div", { class: "chips" }, ks.map((k) => el("button", { class: "chip", type: "button", text: k.name, onclick: () => go("stages", k.stage) }))),
+          el("span", { class: "gate", text: st.gate }))));
+    });
+    p.append(pipe);
+    const w = stageOf("09-workflow-tooling");
+    p.append(el("h4", { text: "Support at any time" }), el("div", { class: "chips" }, skillsIn(w.id).map((k) => el("button", { class: "chip", type: "button", text: k.name, onclick: () => go("stages", w.id) }))));
+  }
+
+  function backlogPanel(p) {
+    p.append(el("div", { class: "phead" }, el("h2", { text: "Not yet read" }), el("div", { class: "muted", text: "Links from the chat export still to open. Add useful ones with 09-workflow-tooling/skills/write-a-skill.md." })));
+    const ul = el("ul", { class: "list" });
+    DATA.backlog.forEach((b, i) => ul.append(el("li", null, el("span", { class: "num", text: String(i + 1).padStart(2, "0") }), link(b.url, b.title))));
+    p.append(ul, el("h4", { text: "Unavailable" }));
+    const dl = el("ul", { class: "list" });
+    DATA.dead.forEach((d) => dl.append(el("li", null, el("span", { class: "num", text: "gone" }), el("span", { text: d.title + ": " + d.reason }))));
+    p.append(dl);
+  }
+
+  function overview(p) {
+    p.append(el("div", { class: "phead" }, el("h2", { text: state.view === "stages" ? "Pick a stage" : "Pick a source" }),
+      el("div", { class: "muted", text: state.view === "stages"
+        ? "Stages are listed in running order. UI design runs in two parts: foundations before the design system, screens after it, so screens are built from a system that already exists."
+        : "Each repository shows its original skills and which consolidated skills they fed." })));
+    if (state.view === "stages") pipelinePanel(p);
+  }
+
+  function search(p, q) {
+    const hit = (t) => (t || "").toLowerCase().indexOf(q) !== -1;
+    const sk = skills.filter((s) => hit(s.name + " " + s.summary + " " + s.fires_when + " " + s.steps.join(" ") + " " + s.slug));
+    const og = originals.filter((o) => hit(o.name + " " + o.desc + " " + o.repo));
+    p.append(el("div", { class: "phead" }, el("h2", { text: "Search results" }), el("div", { class: "muted", text: sk.length + " skills and " + og.length + " original sources match “" + state.q.trim() + "”." }), toolbar()));
+    if (!sk.length && !og.length) p.append(el("div", { class: "empty", text: "Nothing matches. Try a shorter word." }));
+    sk.forEach((s) => p.append(skillNode(s, true)));
+    if (og.length) { p.append(el("h4", { text: "Original sources" })); p.append(el("ul", { style: "list-style:none;padding:0;display:flex;flex-direction:column;gap:6px" }, og.slice(0, 40).map((o) => originLine(o.key)))); }
+  }
+
+  function panel() {
+    const p = document.getElementById("panel"); p.textContent = "";
+    const q = state.q.trim().toLowerCase();
+    if (q) return search(p, q);
+    if (state.view === "pipeline") return pipelinePanel(p);
+    if (state.view === "backlog") return backlogPanel(p);
+    if (!state.sel) return overview(p);
+    if (state.view === "stages") return stagePanel(p, state.sel);
+    return sourcePanel(p, state.sel);
+  }
+
+  function setHash() {
+    const token = state.sel || (state.view !== "stages" ? state.view : "");
+    try { history.replaceState(null, "", token ? "#" + token : location.pathname + location.search); } catch (e) {}
+  }
+  function go(view, sel) { state.view = view; state.sel = sel; setHash(); render(); scrollPanel(); }
+  function select(id) { state.sel = state.sel === id ? null : id; setHash(); render(); scrollPanel(); }
+  function scrollPanel() {
+    if (window.matchMedia("(max-width: 979px)").matches && state.sel) {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.getElementById("panel").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+  }
+  function render() { header(); grid(); panel(); }
+
+  document.getElementById("q").addEventListener("input", (e) => { state.q = e.target.value; panel(); });
+  const h = (location.hash || "").slice(1);
+  if (stages.some((s) => s.id === h)) { state.view = "stages"; state.sel = h; }
+  else if (repos[h] || h === "posts") { state.view = "sources"; state.sel = h; }
+  else if (VIEWS.some(([v]) => v === h)) state.view = h;
+  render();
+})();
+</script>
