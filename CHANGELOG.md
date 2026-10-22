@@ -2,11 +2,11 @@
 
 ## 1.1, 22 October 2026
 
-- Added `playbooks/Erick_ninja_playbook.md`, the owner's own process with the library under every step, as the default playbook.
+- Added `playbooks/Erick_ninja_playbook.md`, the owner's own process with the library under every step, as one of the playbooks.
 - New skills: `platform-map` and `feature-placement` (03), `interaction-teardown` (01), `brief-traceability` (06), `client-presentation` (09).
 - The general line now starts with the platform map and feature placement, and critique starts with the brief check.
 - Build recomputes which originals each skill uses; checks now catch broken links.
-- Dashboard opens on Erick's ninja playbook.
+- Dashboard has a tab for Erick's ninja playbook.
 
 ## 1.0, 22 October 2026
 

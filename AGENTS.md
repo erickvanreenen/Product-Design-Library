@@ -4,8 +4,7 @@ This repository is a library of product design skills. It is not tied to any AI 
 
 ## Routes
 
-0. **Default for this library's owner:** follow `playbooks/Erick_ninja_playbook.md`. Use it whenever Erick (Legend) asks to run a brief, unless he asks for the general line.
-1. **A full brief:** follow `playbooks/run-brief.md`. Work in the project's `work/` folder, run the stages in the order given, and stop at every gate.
+1. **A full brief:** use the playbook the person names. `playbooks/Erick_ninja_playbook.md` is Erick's own process (platform first); `playbooks/run-brief.md` is the general line. If none is named, ask which one. Work in the project's `work/` folder, run the stages in the order given, and stop at every gate.
 2. **One stage:** follow `playbooks/run-one-stage.md`, then the stage folder's `README.md`.
 3. **One skill:** open the skill file. Its Inputs section says what to do if something is missing.
 

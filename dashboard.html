@@ -144,8 +144,8 @@ const DATA = {"generated": "2026-10-22", "pipeline": [{"step": 0, "title": "Inta
   const skills = DATA.skills, originals = DATA.originals, repos = DATA.repos;
   const posts = Object.fromEntries(DATA.posts.map((p) => [p.id, p]));
   const orig = Object.fromEntries(originals.map((o) => [o.key, o]));
-  const VIEWS = [["ninja", "Erick\u2019s ninja playbook"], ["stages", "By stage"], ["pipeline", "Run a brief"], ["sources", "By source"], ["backlog", "Not yet read"]];
-  const state = { view: "ninja", sel: null, q: "" };
+  const VIEWS = [["stages", "By stage"], ["pipeline", "Run a brief"], ["ninja", "Erick\u2019s ninja playbook"], ["sources", "By source"], ["backlog", "Not yet read"]];
+  const state = { view: "stages", sel: null, q: "" };
 
   function el(tag, props) {
     const e = document.createElement(tag);
@@ -337,7 +337,7 @@ const DATA = {"generated": "2026-10-22", "pipeline": [{"step": 0, "title": "Inta
   }
 
   function setHash() {
-    const token = state.sel || (state.view !== "ninja" ? state.view : "");
+    const token = state.sel || (state.view !== "stages" ? state.view : "");
     try { history.replaceState(null, "", token ? "#" + token : location.pathname + location.search); } catch (e) {}
   }
   function go(view, sel) { state.view = view; state.sel = sel; setHash(); render(); scrollPanel(); }

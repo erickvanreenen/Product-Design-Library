@@ -6,7 +6,7 @@ A consolidated, platform-independent set of product design skills for AI-assiste
 
 Use it three ways:
 
-- **Erick's ninja playbook.** The owner's own process: map the platform, place the feature and trace its ripples, research, refine the brief, design, check, align to the design system and present. See [playbooks/Erick_ninja_playbook.md](playbooks/Erick_ninja_playbook.md). This is the default.
+- **Erick's ninja playbook.** The owner's own process: map the platform, place the feature and trace its ripples, research, refine the brief, design, check, align to the design system and present. See [playbooks/Erick_ninja_playbook.md](playbooks/Erick_ninja_playbook.md).
 - **Run a brief end to end.** Give an AI the brief and `playbooks/run-brief.md`. It works through the stages in order, writes a hand-off file at each one, and stops at each gate for a person to decide.
 - **Use one stage or one skill.** For a task that only needs research, open `01-research/` and follow `playbooks/run-one-stage.md`. Every skill file also works on its own.
 
@@ -33,7 +33,7 @@ Folders are numbered by topic. In a full brief, UI design runs in two parts: fou
 
 ```
 AGENTS.md               instructions for any AI using this repository
-playbooks/              Erick_ninja_playbook.md (default), run-brief.md (general line), run-one-stage.md
+playbooks/              Erick_ninja_playbook.md, run-brief.md (general line), run-one-stage.md
 00-... to 09-.../       one folder per stage: README.md (playbook) and skills/*.md
 references/             ux-laws.md, perception.md, ui-data/ (style, colour, type and UX tables)
 templates/              skill.md (the shared format) and work/ (hand-off files for a run)
