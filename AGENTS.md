@@ -4,6 +4,7 @@ This repository is a library of product design skills. It is not tied to any AI 
 
 ## Routes
 
+0. **Default for this library's owner:** follow `playbooks/Erick_ninja_playbook.md`. Use it whenever Erick (Legend) asks to run a brief, unless he asks for the general line.
 1. **A full brief:** follow `playbooks/run-brief.md`. Work in the project's `work/` folder, run the stages in the order given, and stop at every gate.
 2. **One stage:** follow `playbooks/run-one-stage.md`, then the stage folder's `README.md`.
 3. **One skill:** open the skill file. Its Inputs section says what to do if something is missing.
@@ -15,6 +16,7 @@ Always read `00-governance/README.md`. Its skills apply at every stage.
 | The task is about | Open |
 |---|---|
 | A new request, scope, context, gates, decisions, checking AI output | 00-governance |
+| The whole platform's structure, where a feature sits, dependencies and knock-on effects | 03-ux-design (platform-map, feature-placement) |
 | Users, interviews, synthesis, needs, personas, journeys, competitors, domain words | 01-research |
 | Choosing the problem, bets, principles, concepts, picking a direction | 02-ideation |
 | Objects and names, navigation, flows, states and errors, forms, copy, AI behaviour, wireframes | 03-ux-design |

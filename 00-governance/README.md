@@ -22,11 +22,11 @@ Run `intake-brief` on any new request, even a small one. `context-pack` in light
 | 4 | [Log a decision](skills/decision-log.md) | any | A choice is made between options; a gate is passed; something is deliberately not done; a pattern departs from the norm. |
 | 5 | [Check AI output](skills/ai-output-check.md) | any | Any AI-produced research summary, copy, spec, screen or code is about to be shown to a person or used by the next stage. |
 
-## Gate checklist: G0 Scope (Intake)
+## Gate checklist: G0 Scope (Intake and landscape)
 
 - [ ] Problem stated without a solution
 - [ ] Out of scope listed
-- [ ] Bottleneck layer named
+- [ ] Platform mapped and feature placed, ripple owners named
 - [ ] Stages to run agreed by a person
 
 ## Posts and articles that informed this stage

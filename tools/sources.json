@@ -16,6 +16,7 @@
    "inclusive-personas",
    "journey-map",
    "competitive-scan",
+   "interaction-teardown",
    "domain-glossary"
   ],
   "02-ideation": [
@@ -26,6 +27,8 @@
    "select-concept"
   ],
   "03-ux-design": [
+   "platform-map",
+   "feature-placement",
    "conceptual-model",
    "information-architecture",
    "user-flows",
@@ -54,6 +57,7 @@
    "system-governance"
   ],
   "06-design-critique": [
+   "brief-traceability",
    "critique-screen",
    "heuristic-review",
    "coherence-check",
@@ -78,7 +82,8 @@
    "project-setup",
    "handoff-spec",
    "write-rationale",
-   "write-a-skill"
+   "write-a-skill",
+   "client-presentation"
   ]
  },
  "repos": {

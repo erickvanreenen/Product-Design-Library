@@ -5,6 +5,7 @@
 - every skill input refers to a hand-off file written earlier in the run order (or to the brief inputs)
 - no em dashes in authored markdown
 - every original key in draws-on exists
+- every relative markdown link points to a file that exists
 """
 import json, os, re, sys, glob
 
@@ -48,6 +49,13 @@ for s in idx["skills"]:
 for path in glob.glob(os.path.join(ROOT, "**", "*.md"), recursive=True):
     if "—" in open(path, encoding="utf-8").read():
         problems.append(f"{os.path.relpath(path, ROOT)}: contains an em dash")
+
+for path in glob.glob(os.path.join(ROOT, "**", "*.md"), recursive=True):
+    for link in re.findall(r"\]\(([^)#]+?)(?:#[^)]*)?\)", open(path, encoding="utf-8").read()):
+        if link.startswith(("http://", "https://", "mailto:")):
+            continue
+        if not os.path.exists(os.path.normpath(os.path.join(os.path.dirname(path), link))):
+            problems.append(f"{os.path.relpath(path, ROOT)}: broken link {link}")
 
 keys = {o["key"] for o in idx["originals"]} | {p["id"] for p in idx["posts"]}
 for s in idx["skills"]:

@@ -20,9 +20,10 @@ REPOS = S["repos"]
 
 # The run order for a full brief. A stage folder can appear in more than one step (UI design does).
 PIPELINE = [
- {"step": 0, "title": "Intake", "stage": "00-governance", "skills": ["intake-brief", "context-pack"], "writes": "work/00-brief.md, work/context/",
-  "gate": "G0 Scope", "checks": ["Problem stated without a solution", "Out of scope listed", "Bottleneck layer named", "Stages to run agreed by a person"]},
- {"step": 1, "title": "Research", "stage": "01-research", "skills": ["research-plan", "interview-guide", "synthesise-findings", "needs-and-jobs", "inclusive-personas", "journey-map", "competitive-scan", "domain-glossary"],
+ {"step": 0, "title": "Intake and landscape", "stage": "00-governance", "skills": ["intake-brief", "03-ux-design/platform-map", "03-ux-design/feature-placement", "context-pack"],
+  "writes": "work/00-brief.md, work/00-landscape.md, work/context/",
+  "gate": "G0 Scope", "checks": ["Problem stated without a solution", "Out of scope listed", "Platform mapped and feature placed, ripple owners named", "Stages to run agreed by a person"]},
+ {"step": 1, "title": "Research", "stage": "01-research", "skills": ["research-plan", "interview-guide", "synthesise-findings", "needs-and-jobs", "inclusive-personas", "journey-map", "competitive-scan", "interaction-teardown", "domain-glossary"],
   "writes": "work/01-research.md", "gate": "G1 Evidence", "checks": ["Each finding links to raw evidence", "Confidence stated for each finding", "Assumptions separated from findings", "Gaps listed"]},
  {"step": 2, "title": "Ideation", "stage": "02-ideation", "skills": ["frame-problem", "assumptions-and-bets", "design-principles", "explore-concepts", "select-concept", "08-analysis/success-metrics"],
   "writes": "work/02-direction.md", "gate": "G2 Direction", "checks": ["More than one concept explored", "Criteria fixed before scoring", "One direction chosen by a person", "Success metrics defined"]},
@@ -34,13 +35,41 @@ PIPELINE = [
   "writes": "work/05-system/", "gate": "G5 System", "checks": ["Tokens and components exist before screens", "Audit verdict recorded (existing systems)", "DESIGN.md and UX.md tested with an AI"]},
  {"step": 6, "title": "Screens", "stage": "04-ui-design", "skills": ["visual-hierarchy", "data-visualisation", "compose-screen"],
   "writes": "work/04-ui-spec.md (hierarchy, charts, screens)", "gate": "G6 Taste", "checks": ["Screens use system tokens and components only", "Every state built", "Pre-delivery check passed", "Taste pass done by a person"]},
- {"step": 7, "title": "Critique", "stage": "06-design-critique", "skills": ["critique-screen", "heuristic-review", "coherence-check", "slop-check", "critique-session"],
+ {"step": 7, "title": "Critique", "stage": "06-design-critique", "skills": ["brief-traceability", "critique-screen", "heuristic-review", "coherence-check", "slop-check", "critique-session"],
   "writes": "work/06-critique.md", "gate": "G7 Fixes", "checks": ["Each point accepted or rejected with a reason", "Deeper issues routed to the right layer"]},
  {"step": 8, "title": "QA and accessibility", "stage": "07-qa-accessibility", "skills": ["accessibility-audit", "cognitive-load-check", "compliance-check", "usability-test-plan", "design-qa"],
   "writes": "work/07-qa-report.md", "gate": "G8 Ship", "checks": ["No open critical accessibility issues", "No high-severity design QA issues", "Legal applicability checked"]},
  {"step": 9, "title": "Analysis", "stage": "08-analysis", "skills": ["read-analytics", "experiment-design", "ai-feature-evaluation", "impact-report"],
   "writes": "work/08-measurement.md", "gate": "G9 Next", "checks": ["Results read against targets", "Attribution stated honestly", "Next iteration named"]},
 ]
+NINJA = [
+ {"phase": "1. Read the landscape", "checkpoint": "A: Landscape locked", "steps": [
+   [1, "Map the platform", ["03-ux-design/platform-map", "03-ux-design/conceptual-model", "01-research/domain-glossary"], "work/00-landscape.md#platform"],
+   [2, "Place the feature and trace the ripples", ["03-ux-design/feature-placement", "07-qa-accessibility/compliance-check", "00-governance/decision-log"], "work/00-landscape.md#placement"],
+   [3, "Map the feature's own structure", ["03-ux-design/conceptual-model", "03-ux-design/information-architecture", "03-ux-design/user-flows"], "work/03-ux-spec.md#model, #ia"]]},
+ {"phase": "2. Research", "checkpoint": "B: Direction set", "steps": [
+   [4, "Benchmark and tear down interactions", ["01-research/competitive-scan", "01-research/interaction-teardown"], "work/01-research.md#competitors, #teardown"],
+   [5, "Best practice and domain language", ["01-research/domain-glossary", "01-research/research-plan", "01-research/interview-guide", "01-research/inclusive-personas", "07-qa-accessibility/compliance-check"], "work/01-research.md#domain, UX.md glossary"],
+   [6, "Consolidate into a direction", ["01-research/synthesise-findings", "01-research/needs-and-jobs", "02-ideation/frame-problem", "02-ideation/design-principles", "02-ideation/explore-concepts", "02-ideation/select-concept"], "work/02-direction.md"]]},
+ {"phase": "3. Define", "checkpoint": "C: Brief signed off", "steps": [
+   [7, "Refine the brief", ["00-governance/intake-brief", "02-ideation/assumptions-and-bets", "08-analysis/success-metrics", "00-governance/context-pack"], "work/00-brief.md (refined)"]]},
+ {"phase": "4. Design", "checkpoint": "D: Prototype happy", "steps": [
+   [8, "First wireframe iteration", ["03-ux-design/user-flows", "03-ux-design/states-and-errors", "03-ux-design/form-design", "03-ux-design/ux-writing", "03-ux-design/ai-experience", "03-ux-design/wireframe-spec"], "work/03-ux-spec.md"],
+   [9, "High-fidelity prototype", ["05-ai-design-systems/context-files", "05-ai-design-systems/design-tokens", "04-ui-design/visual-direction", "04-ui-design/layout-and-spacing", "04-ui-design/typography", "04-ui-design/colour", "04-ui-design/visual-hierarchy", "04-ui-design/motion", "04-ui-design/compose-screen"], "prototype, work/04-ui-spec.md"],
+   [10, "Refine the prototype", ["06-design-critique/critique-screen", "06-design-critique/slop-check", "07-qa-accessibility/cognitive-load-check", "07-qa-accessibility/usability-test-plan", "06-design-critique/heuristic-review"], "refined prototype"]]},
+ {"phase": "5. Build and hand over", "checkpoint": None, "steps": [
+   [11, "Figma frames and/or prototype to dev", ["05-ai-design-systems/design-tool-sync", "05-ai-design-systems/component-spec", "04-ui-design/motion", "09-workflow-tooling/handoff-spec"], "Figma frames, work/handoff.md"]]},
+ {"phase": "6. Check and polish", "checkpoint": "E: Ready to show", "steps": [
+   [12, "Check against the brief", ["06-design-critique/brief-traceability"], "work/06-critique.md#brief-check"],
+   [13, "Design critique", ["06-design-critique/critique-screen", "06-design-critique/heuristic-review", "06-design-critique/coherence-check", "06-design-critique/slop-check", "07-qa-accessibility/accessibility-audit", "06-design-critique/critique-session"], "work/06-critique.md"],
+   [14, "Update from the critique", ["00-governance/decision-log", "00-governance/stage-gate"], "work/decisions.md"],
+   [15, "Align to the design system in Figma", ["05-ai-design-systems/design-tool-sync", "07-qa-accessibility/design-qa", "07-qa-accessibility/accessibility-audit", "05-ai-design-systems/audit-system"], "aligned frames, sync log"]]},
+ {"phase": "7. Present", "checkpoint": "F: Client decision", "steps": [
+   [16, "Final client presentation", ["09-workflow-tooling/client-presentation", "09-workflow-tooling/write-rationale"], "deck, work/presentation.md"]]},
+ {"phase": "Encore", "checkpoint": None, "steps": [
+   [17, "Close the loop after launch", ["08-analysis/read-analytics", "08-analysis/experiment-design", "08-analysis/impact-report"], "work/08-measurement.md"]]},
+]
+
 STEP_OF = {}
 for p in PIPELINE:
     for k in p["skills"]:
@@ -131,6 +160,14 @@ for stage in FOLDER_ORDER:
                        "inputs": meta.get("inputs", []), "output": meta.get("output", ""), "steps": meta["steps"],
                        "draws_on": draws, "version": meta.get("version", ""), "updated": meta.get("updated", "")})
 
+# who uses each original, recomputed from the skill files
+for o in S["originals"]:
+    o["used_by"] = []
+for s in skills:
+    for d in s["draws_on"]:
+        if d in ORIG:
+            ORIG[d]["used_by"].append(s["id"])
+
 # references
 refs = []
 for path in sorted(glob.glob(os.path.join(ROOT, "references", "*.md"))):
@@ -140,6 +177,14 @@ for path in sorted(glob.glob(os.path.join(ROOT, "references", "*.md"))):
     draws = meta.get("draws-on", [])
     open(path, "w", encoding="utf-8").write(f"---\n{fm}\n---\n{body}\n\n## Sources\nRewritten from:\n" + "\n".join(source_line(d) for d in draws) + "\n")
     refs.append({"file": "references/" + os.path.basename(path), "name": meta.get("name"), "draws_on": draws})
+    for d in draws:
+        if d in ORIG:
+            ORIG[d]["used_by"].append("references/" + os.path.basename(path)[:-3])
+
+_ids = {s["id"] for s in skills}
+_bad = [k for ph in NINJA for st in ph["steps"] for k in st[2] if k not in _ids]
+if _bad:
+    raise SystemExit(f"Erick_ninja_playbook refers to unknown skills: {_bad}")
 
 # stage READMEs
 for st in STAGES:
@@ -212,12 +257,15 @@ write("NOTICES.md", "\n".join(notice))
 
 # work templates
 WORK = {
+ "00-landscape.md": ["Landscape", ["Platform", "Placement"]],
+ "presentation.md": ["Presentation", ["Audience", "Story", "Objections", "Follow-up"]],
+ "handoff.md": ["Hand-off", ["Visual", "Interaction", "Content", "Accessibility", "Analytics", "Assets", "Open questions"]],
  "00-brief.md": ["Brief", ["Problem", "Audience", "Success criteria", "In scope", "Out of scope", "Constraints", "Assumptions", "Layer audit", "Bottleneck", "Stages to run", "Open questions"]],
- "01-research.md": ["Research", ["Plan", "Interview guide", "Findings", "Needs", "Personas", "Journeys", "Competitors", "Domain"]],
+ "01-research.md": ["Research", ["Plan", "Interview guide", "Competitors", "Teardown", "Domain", "Findings", "Needs", "Personas", "Journeys"]],
  "02-direction.md": ["Direction", ["Problem", "Bets", "Principles", "Concepts", "Decision", "Metrics"]],
  "03-ux-spec.md": ["UX spec", ["Model", "IA", "Flows", "States", "Forms", "Copy", "AI behaviour", "Wireframes"]],
  "04-ui-spec.md": ["UI spec", ["Direction", "Layout", "Type", "Colour", "Hierarchy", "Motion", "Charts", "Screens"]],
- "06-critique.md": ["Critique", ["Screens", "Heuristics", "Coherence", "Slop", "Session"]],
+ "06-critique.md": ["Critique", ["Brief check", "Screens", "Heuristics", "Coherence", "Slop", "Session"]],
  "07-qa-report.md": ["QA report", ["Accessibility", "Cognitive load", "Compliance", "Usability plan", "Design QA"]],
  "08-measurement.md": ["Measurement", ["Plan", "Readout", "Experiments", "AI evaluation", "Impact"]],
  "decisions.md": ["Decisions", []],
@@ -248,13 +296,13 @@ write("references/ui-data/README.md", "# UI reference data\n\nSearchable tables 
       "Treat the data as suggestions to choose from, then record the choice in DESIGN.md.")
 
 # index.json
-index = {"generated": S["generated"], "pipeline": PIPELINE, "stages": STAGES, "skills": skills, "references": refs,
+index = {"generated": S["generated"], "playbooks": {"erick_ninja": NINJA}, "pipeline": PIPELINE, "stages": STAGES, "skills": skills, "references": refs,
          "repos": REPOS, "originals": S["originals"], "posts": S["posts"], "backlog": S["backlog"], "dead": S["dead"]}
 write("index.json", json.dumps(index, indent=1, ensure_ascii=False))
 
 # dashboard
 tpl = open(os.path.join(ROOT, "tools", "dashboard.template.html"), encoding="utf-8").read()
-slim = {"generated": S["generated"], "pipeline": PIPELINE, "stages": STAGES, "skills": skills, "repos": REPOS, "posts": S["posts"],
+slim = {"generated": S["generated"], "pipeline": PIPELINE, "ninja": NINJA, "stages": STAGES, "skills": skills, "repos": REPOS, "posts": S["posts"],
         "originals": [{k: o[k] for k in ("key", "repo", "name", "url", "desc", "stage", "used_by")} for o in S["originals"]],
         "backlog": S["backlog"], "dead": S["dead"]}
 body = tpl.replace("/*DATA*/", json.dumps(slim, ensure_ascii=False).replace("</", "<\\/"))

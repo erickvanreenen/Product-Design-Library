@@ -14,14 +14,16 @@ Needs the job story and the chosen direction. For a small change, start at `user
 
 | # | Skill | Step | Use when |
 |---|---|---|---|
-| 1 | [Define the conceptual model](skills/conceptual-model.md) | 3 | Before flows or screens; "what are the objects", "what do we call this"; naming arguments; a redesign where the product feels inconsistent. |
-| 2 | [Structure the information architecture](skills/information-architecture.md) | 3 | Organising content or features; designing navigation; "where does this live", "users cannot find X"; content volume is growing. |
-| 3 | [Map user flows](skills/user-flows.md) | 3 | Designing how a user completes a job; "map the flow", "what are the steps", "what happens if it fails"; before wireframes. |
-| 4 | [Design states, feedback and errors](skills/states-and-errors.md) | 3 | Any flow or component is specified; "what does it show while loading", "write the error states", "what if it fails"; before handoff. |
-| 5 | [Design forms](skills/form-design.md) | 3 | Any form, sign-up, checkout or data entry; "people drop out of this form", "design the form". |
-| 6 | [Write interface copy](skills/ux-writing.md) | 3 | Labels, buttons, errors, empty states, onboarding or help text are needed; "write the copy", "what should this button say", "review this microcopy". |
-| 7 | [Design the AI experience](skills/ai-experience.md) | 3 | The product has an AI feature (assistant, generation, recommendations, agents); "design the AI feature", "how should the AI behave", "what happens when it is wrong". |
-| 8 | [Specify wireframes](skills/wireframe-spec.md) | 3 | Flows and states are settled and layout must be decided; "wireframe this", "lay out the screen"; also first-run and onboarding screens. |
+| 1 | [Map the platform](skills/platform-map.md) | 0 | Before designing any feature on an existing or planned platform; "how does the whole thing fit together", "show me the big picture", "map the platform"; step 1 of erick_process. |
+| 2 | [Place the feature and trace its ripples](skills/feature-placement.md) | 0 | A feature or product is being designed inside a larger platform; "where does this sit", "what will this affect", "what does it depend on"; step 2 of erick_process. |
+| 3 | [Define the conceptual model](skills/conceptual-model.md) | 3 | Before flows or screens; "what are the objects", "what do we call this"; naming arguments; a redesign where the product feels inconsistent. |
+| 4 | [Structure the information architecture](skills/information-architecture.md) | 3 | Organising content or features; designing navigation; "where does this live", "users cannot find X"; content volume is growing. |
+| 5 | [Map user flows](skills/user-flows.md) | 3 | Designing how a user completes a job; "map the flow", "what are the steps", "what happens if it fails"; before wireframes. |
+| 6 | [Design states, feedback and errors](skills/states-and-errors.md) | 3 | Any flow or component is specified; "what does it show while loading", "write the error states", "what if it fails"; before handoff. |
+| 7 | [Design forms](skills/form-design.md) | 3 | Any form, sign-up, checkout or data entry; "people drop out of this form", "design the form". |
+| 8 | [Write interface copy](skills/ux-writing.md) | 3 | Labels, buttons, errors, empty states, onboarding or help text are needed; "write the copy", "what should this button say", "review this microcopy". |
+| 9 | [Design the AI experience](skills/ai-experience.md) | 3 | The product has an AI feature (assistant, generation, recommendations, agents); "design the AI feature", "how should the AI behave", "what happens when it is wrong". |
+| 10 | [Specify wireframes](skills/wireframe-spec.md) | 3 | Flows and states are settled and layout must be decided; "wireframe this", "lay out the screen"; also first-run and onboarding screens. |
 
 ## Gate checklist: G3 Spec (UX design)
 

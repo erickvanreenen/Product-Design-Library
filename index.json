@@ -1,20 +1,261 @@
 {
  "generated": "2026-10-22",
+ "playbooks": {
+  "erick_ninja": [
+   {
+    "phase": "1. Read the landscape",
+    "checkpoint": "A: Landscape locked",
+    "steps": [
+     [
+      1,
+      "Map the platform",
+      [
+       "03-ux-design/platform-map",
+       "03-ux-design/conceptual-model",
+       "01-research/domain-glossary"
+      ],
+      "work/00-landscape.md#platform"
+     ],
+     [
+      2,
+      "Place the feature and trace the ripples",
+      [
+       "03-ux-design/feature-placement",
+       "07-qa-accessibility/compliance-check",
+       "00-governance/decision-log"
+      ],
+      "work/00-landscape.md#placement"
+     ],
+     [
+      3,
+      "Map the feature's own structure",
+      [
+       "03-ux-design/conceptual-model",
+       "03-ux-design/information-architecture",
+       "03-ux-design/user-flows"
+      ],
+      "work/03-ux-spec.md#model, #ia"
+     ]
+    ]
+   },
+   {
+    "phase": "2. Research",
+    "checkpoint": "B: Direction set",
+    "steps": [
+     [
+      4,
+      "Benchmark and tear down interactions",
+      [
+       "01-research/competitive-scan",
+       "01-research/interaction-teardown"
+      ],
+      "work/01-research.md#competitors, #teardown"
+     ],
+     [
+      5,
+      "Best practice and domain language",
+      [
+       "01-research/domain-glossary",
+       "01-research/research-plan",
+       "01-research/interview-guide",
+       "01-research/inclusive-personas",
+       "07-qa-accessibility/compliance-check"
+      ],
+      "work/01-research.md#domain, UX.md glossary"
+     ],
+     [
+      6,
+      "Consolidate into a direction",
+      [
+       "01-research/synthesise-findings",
+       "01-research/needs-and-jobs",
+       "02-ideation/frame-problem",
+       "02-ideation/design-principles",
+       "02-ideation/explore-concepts",
+       "02-ideation/select-concept"
+      ],
+      "work/02-direction.md"
+     ]
+    ]
+   },
+   {
+    "phase": "3. Define",
+    "checkpoint": "C: Brief signed off",
+    "steps": [
+     [
+      7,
+      "Refine the brief",
+      [
+       "00-governance/intake-brief",
+       "02-ideation/assumptions-and-bets",
+       "08-analysis/success-metrics",
+       "00-governance/context-pack"
+      ],
+      "work/00-brief.md (refined)"
+     ]
+    ]
+   },
+   {
+    "phase": "4. Design",
+    "checkpoint": "D: Prototype happy",
+    "steps": [
+     [
+      8,
+      "First wireframe iteration",
+      [
+       "03-ux-design/user-flows",
+       "03-ux-design/states-and-errors",
+       "03-ux-design/form-design",
+       "03-ux-design/ux-writing",
+       "03-ux-design/ai-experience",
+       "03-ux-design/wireframe-spec"
+      ],
+      "work/03-ux-spec.md"
+     ],
+     [
+      9,
+      "High-fidelity prototype",
+      [
+       "05-ai-design-systems/context-files",
+       "05-ai-design-systems/design-tokens",
+       "04-ui-design/visual-direction",
+       "04-ui-design/layout-and-spacing",
+       "04-ui-design/typography",
+       "04-ui-design/colour",
+       "04-ui-design/visual-hierarchy",
+       "04-ui-design/motion",
+       "04-ui-design/compose-screen"
+      ],
+      "prototype, work/04-ui-spec.md"
+     ],
+     [
+      10,
+      "Refine the prototype",
+      [
+       "06-design-critique/critique-screen",
+       "06-design-critique/slop-check",
+       "07-qa-accessibility/cognitive-load-check",
+       "07-qa-accessibility/usability-test-plan",
+       "06-design-critique/heuristic-review"
+      ],
+      "refined prototype"
+     ]
+    ]
+   },
+   {
+    "phase": "5. Build and hand over",
+    "checkpoint": null,
+    "steps": [
+     [
+      11,
+      "Figma frames and/or prototype to dev",
+      [
+       "05-ai-design-systems/design-tool-sync",
+       "05-ai-design-systems/component-spec",
+       "04-ui-design/motion",
+       "09-workflow-tooling/handoff-spec"
+      ],
+      "Figma frames, work/handoff.md"
+     ]
+    ]
+   },
+   {
+    "phase": "6. Check and polish",
+    "checkpoint": "E: Ready to show",
+    "steps": [
+     [
+      12,
+      "Check against the brief",
+      [
+       "06-design-critique/brief-traceability"
+      ],
+      "work/06-critique.md#brief-check"
+     ],
+     [
+      13,
+      "Design critique",
+      [
+       "06-design-critique/critique-screen",
+       "06-design-critique/heuristic-review",
+       "06-design-critique/coherence-check",
+       "06-design-critique/slop-check",
+       "07-qa-accessibility/accessibility-audit",
+       "06-design-critique/critique-session"
+      ],
+      "work/06-critique.md"
+     ],
+     [
+      14,
+      "Update from the critique",
+      [
+       "00-governance/decision-log",
+       "00-governance/stage-gate"
+      ],
+      "work/decisions.md"
+     ],
+     [
+      15,
+      "Align to the design system in Figma",
+      [
+       "05-ai-design-systems/design-tool-sync",
+       "07-qa-accessibility/design-qa",
+       "07-qa-accessibility/accessibility-audit",
+       "05-ai-design-systems/audit-system"
+      ],
+      "aligned frames, sync log"
+     ]
+    ]
+   },
+   {
+    "phase": "7. Present",
+    "checkpoint": "F: Client decision",
+    "steps": [
+     [
+      16,
+      "Final client presentation",
+      [
+       "09-workflow-tooling/client-presentation",
+       "09-workflow-tooling/write-rationale"
+      ],
+      "deck, work/presentation.md"
+     ]
+    ]
+   },
+   {
+    "phase": "Encore",
+    "checkpoint": null,
+    "steps": [
+     [
+      17,
+      "Close the loop after launch",
+      [
+       "08-analysis/read-analytics",
+       "08-analysis/experiment-design",
+       "08-analysis/impact-report"
+      ],
+      "work/08-measurement.md"
+     ]
+    ]
+   }
+  ]
+ },
  "pipeline": [
   {
    "step": 0,
-   "title": "Intake",
+   "title": "Intake and landscape",
    "stage": "00-governance",
    "skills": [
     "intake-brief",
+    "03-ux-design/platform-map",
+    "03-ux-design/feature-placement",
     "context-pack"
    ],
-   "writes": "work/00-brief.md, work/context/",
+   "writes": "work/00-brief.md, work/00-landscape.md, work/context/",
    "gate": "G0 Scope",
    "checks": [
     "Problem stated without a solution",
     "Out of scope listed",
-    "Bottleneck layer named",
+    "Platform mapped and feature placed, ripple owners named",
     "Stages to run agreed by a person"
    ]
   },
@@ -30,6 +271,7 @@
     "inclusive-personas",
     "journey-map",
     "competitive-scan",
+    "interaction-teardown",
     "domain-glossary"
    ],
    "writes": "work/01-research.md",
@@ -147,6 +389,7 @@
    "title": "Critique",
    "stage": "06-design-critique",
    "skills": [
+    "brief-traceability",
     "critique-screen",
     "heuristic-review",
     "coherence-check",
@@ -212,11 +455,11 @@
    "gates": [
     {
      "gate": "G0 Scope",
-     "title": "Intake",
+     "title": "Intake and landscape",
      "checks": [
       "Problem stated without a solution",
       "Out of scope listed",
-      "Bottleneck layer named",
+      "Platform mapped and feature placed, ripple owners named",
       "Stages to run agreed by a person"
      ]
     }
@@ -818,11 +1061,46 @@
    "updated": "2026-10-22"
   },
   {
+   "id": "01-research/interaction-teardown",
+   "file": "01-research/skills/interaction-teardown.md",
+   "slug": "interaction-teardown",
+   "stage": "01-research",
+   "order": 8,
+   "step": 1,
+   "name": "Tear down competitor interactions",
+   "summary": "Takes the best competitors apart at two levels: the big flow (macro) and the small moments inside it (micro), so you learn the principles behind what makes them feel good, not just what they look like.",
+   "fires_when": "Benchmarking how others handle a flow in detail; \"how do the best apps do this\", \"break down their interactions\", \"macro and micro interactions\"; step 4 of erick_process.",
+   "inputs": [
+    "work/00-landscape.md#placement",
+    "work/01-research.md#competitors"
+   ],
+   "output": "work/01-research.md#teardown",
+   "steps": [
+    "Pick three to five products from the scan: two direct competitors, one best-in-class from another field, and optionally one known for a bad version (to learn what to avoid).",
+    "Record each flow end to end (screen recording or a sequence of screenshots from a flow library such as Mobbin). Note the date and the platform.",
+    "Macro teardown, per flow: entry point, number of steps, what is asked first and what waits, where the user commits, where it branches, how errors and empty states are handled, where it hands over to email, notification or a person, and how it ends.",
+    "Micro teardown, per notable moment: trigger, what the system does, feedback (visual, motion, sound, haptic), timing and easing as best you can judge, what happens on repeat, and how it behaves with reduced motion or a screen reader.",
+    "Capture language: button labels, headings, error and empty-state wording, and the terms they use for key objects. Add them to the domain glossary.",
+    "Score each flow on clarity, effort (steps and decisions), confidence (feedback and reassurance), recovery (errors), accessibility and delight, 1 to 5 each.",
+    "Extract principles, not pixels: for each strong moment, write the principle in one line (\"show the total before asking for card details\"). For each weak moment, the anti-pattern.",
+    "Map table stakes, gaps and signature moments: what everyone does (users expect it), what everyone does badly (your opening), and the one or two moments worth designing your own version of."
+   ],
+   "draws_on": [
+    "designer-skills/ux-strategy/competitive-analysis",
+    "designer-skills/interaction-design/micro-interaction-spec",
+    "designer-skills/interaction-design/feedback-patterns",
+    "designer-skills/interaction-design/animation-principles",
+    "S21"
+   ],
+   "version": "1.0",
+   "updated": "2026-10-22"
+  },
+  {
    "id": "01-research/domain-glossary",
    "file": "01-research/skills/domain-glossary.md",
    "slug": "domain-glossary",
    "stage": "01-research",
-   "order": 8,
+   "order": 9,
    "step": 1,
    "name": "Map the domain and glossary",
    "summary": "Maps the real-world concepts, words and processes users bring with them before any product exists, so the product's model and copy match how people think.",
@@ -1011,11 +1289,87 @@
    "updated": "2026-10-22"
   },
   {
+   "id": "03-ux-design/platform-map",
+   "file": "03-ux-design/skills/platform-map.md",
+   "slug": "platform-map",
+   "stage": "03-ux-design",
+   "order": 1,
+   "step": 0,
+   "name": "Map the platform",
+   "summary": "Draws the whole platform on one page as a few zones and the main streams of information flowing between them, so everyone sees the big picture before anyone designs a part of it.",
+   "fires_when": "Before designing any feature on an existing or planned platform; \"how does the whole thing fit together\", \"show me the big picture\", \"map the platform\"; step 1 of erick_process.",
+   "inputs": [
+    "work/00-brief.md",
+    "sitemaps",
+    "analytics",
+    "existing screens",
+    "API or data docs",
+    "org charts in work/inputs/"
+   ],
+   "output": "work/00-landscape.md#platform",
+   "steps": [
+    "Collect the raw parts. Walk every top-level area of the product (or the plan). List areas, the main things (objects) each one handles, and every way people get in: web, app, email, notifications, support, partners, staff tools.",
+    "Find the main objects. Which few things does the whole platform revolve around (for example customer, product, order, payment, content)? Use the conceptual-model test: many instances, own attributes, people care about it.",
+    "Group into zones. Five to seven zones at most, named in the user's language, not the org chart: for example \"Discover\", \"Buy\", \"Account\", \"Support\", \"Back office\".",
+    "Draw the streams. Arrows between zones, each labelled with what information moves (\"order details\", \"stock level\", \"customer profile\"), not with screen names. Mark which streams are real-time and which are delayed.",
+    "Mark the edges of the platform: outside systems (payments, CRM, warehouse, analytics), the people and teams behind the scenes, and the line between what users see and what they do not.",
+    "Mark the single sources of truth: for each main object, where the master record lives.",
+    "Simplify until it reads in ten seconds. Remove anything that does not change a design decision. One colour per stream type. If a newcomer cannot explain it back in a sentence, simplify again.",
+    "Mark the unknowns with a question mark rather than guessing, and list who can answer each.",
+    "Produce it in two forms: a clean visual for people (Figma, FigJam or a whiteboard) and a text version (Mermaid diagram plus a short zone list) that any AI can read."
+   ],
+   "draws_on": [
+    "designer-skills/ux-strategy/information-architecture",
+    "designer-skills/ux-strategy/experience-map",
+    "designer-skills/ux-strategy/service-blueprint",
+    "layers-skills/layers/layers-domain",
+    "layers-skills/layers/layers-conceptual-model"
+   ],
+   "version": "1.0",
+   "updated": "2026-10-22"
+  },
+  {
+   "id": "03-ux-design/feature-placement",
+   "file": "03-ux-design/skills/feature-placement.md",
+   "slug": "feature-placement",
+   "stage": "03-ux-design",
+   "order": 2,
+   "step": 0,
+   "name": "Place the feature and trace its ripples",
+   "summary": "Puts the feature on the platform map and traces what it depends on, what depends on it, and the knock-on effects two and three steps away, so nothing downstream breaks by surprise.",
+   "fires_when": "A feature or product is being designed inside a larger platform; \"where does this sit\", \"what will this affect\", \"what does it depend on\"; step 2 of erick_process.",
+   "inputs": [
+    "work/00-landscape.md#platform",
+    "work/00-brief.md"
+   ],
+   "output": "work/00-landscape.md#placement",
+   "steps": [
+    "Pin the feature on the platform map. Which zone it lives in, which zones it touches, and which main objects it reads, creates, changes or deletes.",
+    "Trace upstream (what it needs): the data, objects, services, content and decisions that must exist for it to work. For each: where it comes from, who owns it, how reliable it is, and whether it is hard (blocking) or soft (nice to have).",
+    "Trace downstream (what relies on it): screens, emails, reports, staff tools, analytics, partner feeds and other features that use what this feature produces or changes.",
+    "Find co-dependencies: places where this feature and another both change the same object or flow, so changes must be designed together.",
+    "Run the ripple test for every change the feature makes to an object or flow:",
+    "Check the edges of each object: what happens to things that refer to it when it is edited, archived or deleted; what history must be kept.",
+    "Score each ripple by likelihood times impact, and name an owner and a response (design for it, agree with the owning team, accept, or rule out of scope).",
+    "Draw the placement map: the feature in the middle, upstream on the left, downstream on the right, co-dependencies above, coloured by risk. Keep it as simple as the platform map.",
+    "Feed the brief: list the dependencies that change scope, the teams to involve, and the questions research must answer."
+   ],
+   "draws_on": [
+    "ux-pgm-skills/program-planning/dependency-map",
+    "ux-pgm-skills/delivery-execution/risk-register",
+    "designer-skills/ux-strategy/service-blueprint",
+    "layers-skills/layers/layers-conceptual-model",
+    "ai-design-skills/ai-alignment-reasoning/harm-anticipation"
+   ],
+   "version": "1.0",
+   "updated": "2026-10-22"
+  },
+  {
    "id": "03-ux-design/conceptual-model",
    "file": "03-ux-design/skills/conceptual-model.md",
    "slug": "conceptual-model",
    "stage": "03-ux-design",
-   "order": 1,
+   "order": 3,
    "step": 3,
    "name": "Define the conceptual model",
    "summary": "Decides the objects the product recognises, how they relate, what users can do to them, what states they pass through, and one name for each. It is the most neglected layer, and every flow and screen above depends on it.",
@@ -1048,7 +1402,7 @@
    "file": "03-ux-design/skills/information-architecture.md",
    "slug": "information-architecture",
    "stage": "03-ux-design",
-   "order": 2,
+   "order": 4,
    "step": 3,
    "name": "Structure the information architecture",
    "summary": "Organises content and features into a structure and navigation that match how users think, so they always know where they are, where they can go and how to get back.",
@@ -1083,7 +1437,7 @@
    "file": "03-ux-design/skills/user-flows.md",
    "slug": "user-flows",
    "stage": "03-ux-design",
-   "order": 3,
+   "order": 5,
    "step": 3,
    "name": "Map user flows",
    "summary": "Settles the interaction logic of a flow, with every place, action, destination and edge case, before visual design makes changes expensive.",
@@ -1118,7 +1472,7 @@
    "file": "03-ux-design/skills/states-and-errors.md",
    "slug": "states-and-errors",
    "stage": "03-ux-design",
-   "order": 4,
+   "order": 6,
    "step": 3,
    "name": "Design states, feedback and errors",
    "summary": "Specifies every state a screen or component can be in, the feedback for every action, and how errors are prevented, explained and recovered from.",
@@ -1152,7 +1506,7 @@
    "file": "03-ux-design/skills/form-design.md",
    "slug": "form-design",
    "stage": "03-ux-design",
-   "order": 5,
+   "order": 7,
    "step": 3,
    "name": "Design forms",
    "summary": "Designs forms that ask for less, are easy to complete and accessible, and recover gracefully from mistakes.",
@@ -1186,7 +1540,7 @@
    "file": "03-ux-design/skills/ux-writing.md",
    "slug": "ux-writing",
    "stage": "03-ux-design",
-   "order": 6,
+   "order": 8,
    "step": 3,
    "name": "Write interface copy",
    "summary": "Writes clear, plain interface copy in the product's voice that uses the model's vocabulary and helps people act.",
@@ -1220,7 +1574,7 @@
    "file": "03-ux-design/skills/ai-experience.md",
    "slug": "ai-experience",
    "stage": "03-ux-design",
-   "order": 7,
+   "order": 9,
    "step": 3,
    "name": "Design the AI experience",
    "summary": "Specifies how an AI feature behaves for users: who leads, how confident it sounds, what it shows about its sources and limits, what it can generate, and what happens when it fails or should hand over.",
@@ -1259,7 +1613,7 @@
    "file": "03-ux-design/skills/wireframe-spec.md",
    "slug": "wireframe-spec",
    "stage": "03-ux-design",
-   "order": 8,
+   "order": 10,
    "step": 3,
    "name": "Specify wireframes",
    "summary": "Turns flows into annotated, greyscale layouts that fix content priority and behaviour before any visual design.",
@@ -1764,11 +2118,47 @@
    "updated": "2026-10-22"
   },
   {
+   "id": "06-design-critique/brief-traceability",
+   "file": "06-design-critique/skills/brief-traceability.md",
+   "slug": "brief-traceability",
+   "stage": "06-design-critique",
+   "order": 1,
+   "step": 7,
+   "name": "Check the design against the brief",
+   "summary": "Traces every requirement, success criterion and constraint in the refined brief to where the design answers it, with evidence, so gaps surface before the client finds them.",
+   "fires_when": "A design or prototype is close to done; \"does this answer the brief\", \"have we missed anything\"; before critique and before client presentation; step 12 of erick_process.",
+   "inputs": [
+    "work/00-brief.md",
+    "work/00-landscape.md#placement",
+    "the prototype or screens",
+    "work/decisions.md"
+   ],
+   "output": "work/06-critique.md#brief-check",
+   "steps": [
+    "Break the brief into checkable lines: each goal, success criterion, user need, constraint (brand, legal, technical, accessibility, timeline), deliverable, and each dependency or ripple marked \"design for it\" in the placement map.",
+    "Trace each line to the screens, states, flows or copy that answer it. Link the frame or prototype step.",
+    "Mark each line: met (with evidence), partly met (what is missing), not met, or deliberately out of scope (with the decision that put it there).",
+    "Check the reverse direction: list anything in the design that no brief line asks for. Keep it only if it serves a stated goal; otherwise flag it as scope creep.",
+    "Check the ripples: confirm every downstream effect from `feature-placement` has a designed answer or an agreed owner.",
+    "Check readiness domains: flows and edge states, accessibility, content and copy, measurement (are success metrics measurable in this design), and hand-off completeness.",
+    "Summarise: a one-line verdict per goal, the gaps to close before presenting, and the risks to name openly to the client."
+   ],
+   "draws_on": [
+    "designer-skills/design-ops/design-review-process",
+    "designer-skills/ux-strategy/design-brief",
+    "ux-pgm-skills/program-planning/scoping-framework",
+    "ux-pgm-skills/delivery-execution/launch-readiness",
+    "layers-skills/layers/layers-surface"
+   ],
+   "version": "1.0",
+   "updated": "2026-10-22"
+  },
+  {
    "id": "06-design-critique/critique-screen",
    "file": "06-design-critique/skills/critique-screen.md",
    "slug": "critique-screen",
    "stage": "06-design-critique",
-   "order": 1,
+   "order": 2,
    "step": 7,
    "name": "Critique a screen",
    "summary": "Reviews one screen against seven craft lenses and returns a prioritised fix list, each point with an observation, the problem and a specific fix.",
@@ -1805,7 +2195,7 @@
    "file": "06-design-critique/skills/heuristic-review.md",
    "slug": "heuristic-review",
    "stage": "06-design-critique",
-   "order": 2,
+   "order": 3,
    "step": 7,
    "name": "Run a heuristic review",
    "summary": "Walks through the product against recognised usability heuristics, adapted for AI features where present, and rates each problem by severity.",
@@ -1847,7 +2237,7 @@
    "file": "06-design-critique/skills/coherence-check.md",
    "slug": "coherence-check",
    "stage": "06-design-critique",
-   "order": 3,
+   "order": 4,
    "step": 7,
    "name": "Check coherence with the layers below",
    "summary": "Checks that what users see matches what was decided underneath (the model, vocabulary, flows and needs), and separates true surface fixes from problems that need a lower layer revisited.",
@@ -1881,7 +2271,7 @@
    "file": "06-design-critique/skills/slop-check.md",
    "slug": "slop-check",
    "stage": "06-design-critique",
-   "order": 4,
+   "order": 5,
    "step": 7,
    "name": "Check for AI slop",
    "summary": "Finds and removes the tells that make writing and interfaces read as machine-made and generic, so the work sounds and looks like this product.",
@@ -1919,7 +2309,7 @@
    "file": "06-design-critique/skills/critique-session.md",
    "slug": "critique-session",
    "stage": "06-design-critique",
-   "order": 5,
+   "order": 6,
    "step": 7,
    "name": "Run a critique session",
    "summary": "Runs a structured critique with people that produces clear, actionable decisions instead of opinions.",
@@ -2401,6 +2791,43 @@
    "draws_on": [
     "S31",
     "S01"
+   ],
+   "version": "1.0",
+   "updated": "2026-10-22"
+  },
+  {
+   "id": "09-workflow-tooling/client-presentation",
+   "file": "09-workflow-tooling/skills/client-presentation.md",
+   "slug": "client-presentation",
+   "stage": "09-workflow-tooling",
+   "order": 5,
+   "step": null,
+   "name": "Present to the client",
+   "summary": "Tells the story of the work so the client sees the thinking, trusts the decisions and leaves with a clear yes and next step.",
+   "fires_when": "The final or milestone presentation to a client or stakeholders; \"prepare the client presentation\", \"walk them through it\"; step 16 of erick_process.",
+   "inputs": [
+    "work/00-brief.md",
+    "work/00-landscape.md",
+    "work/01-research.md",
+    "work/06-critique.md#brief-check",
+    "work/decisions.md",
+    "the prototype"
+   ],
+   "output": "work/presentation.md and the deck or live walkthrough",
+   "steps": [
+    "Know the room: who decides, who influences, what each cares about (revenue, cost, risk, brand, users), and what they last saw.",
+    "Build the story arc:",
+    "Translate into business terms: which metric each key decision moves, and the cost of not doing it. Separate evidence from craft judgement.",
+    "Prepare for pushback: list the three hardest likely questions with short answers. For \"can we change X\", ask what outcome they want, then offer options that meet it.",
+    "Rehearse the demo on the device and connection you will present on. Have screenshots ready as a fallback.",
+    "Follow up within a day: a one-page summary (decision made, open items with owners, next date) and the prototype link."
+   ],
+   "draws_on": [
+    "designer-skills/designer-toolkit/presentation-deck",
+    "designer-skills/designer-toolkit/design-rationale",
+    "designer-skills/designer-toolkit/design-negotiation",
+    "ux-pgm-skills/stakeholder-comms/executive-update",
+    "designer-skills/ux-strategy/business-design"
    ],
    "version": "1.0",
    "updated": "2026-10-22"
@@ -2897,7 +3324,8 @@
    "desc": "Establish review gates: criteria, checkpoints, and approval flow. Use when work ships without consistent review. For running one individual session, use `design-critique`.",
    "stage": "09-workflow-tooling",
    "used_by": [
-    "00-governance/stage-gate"
+    "00-governance/stage-gate",
+    "06-design-critique/brief-traceability"
    ]
   },
   {
@@ -3257,7 +3685,9 @@
    "url": "https://github.com/Owl-Listener/designer-skills/blob/main/designer-toolkit/skills/design-negotiation/SKILL.md",
    "desc": "Advocate for design quality, scope, and timeline with partners and leadership using evidence and shared goals. Use in the conversation itself. For the commercial vocabulary behind it, use `business-design` (ux-strategy).",
    "stage": "09-workflow-tooling",
-   "used_by": []
+   "used_by": [
+    "09-workflow-tooling/client-presentation"
+   ]
   },
   {
    "key": "designer-skills/designer-toolkit/design-rationale",
@@ -3269,7 +3699,8 @@
    "stage": "09-workflow-tooling",
    "used_by": [
     "00-governance/decision-log",
-    "09-workflow-tooling/write-rationale"
+    "09-workflow-tooling/write-rationale",
+    "09-workflow-tooling/client-presentation"
    ]
   },
   {
@@ -3303,7 +3734,8 @@
    "desc": "Structure a design presentation for a specific audience and decision. Use when presenting internally. For a portfolio narrative use `case-study`; for the written argument use `design-rationale`.",
    "stage": "09-workflow-tooling",
    "used_by": [
-    "09-workflow-tooling/write-rationale"
+    "09-workflow-tooling/write-rationale",
+    "09-workflow-tooling/client-presentation"
    ]
   },
   {
@@ -3327,6 +3759,7 @@
    "desc": "Apply animation principles: easing, staging, follow-through: to one specific UI motion. Use when tuning how an animation feels. For product-wide duration and easing tokens use `motion-system` (design-systems); for a fu",
    "stage": "03-ux-design",
    "used_by": [
+    "01-research/interaction-teardown",
     "04-ui-design/motion"
    ]
   },
@@ -3373,6 +3806,7 @@
    "desc": "Design confirmations, status updates, and notifications that tell users an action registered. Use when the system must acknowledge success or change. For waiting states use `loading-states`; for failures use `error-handl",
    "stage": "03-ux-design",
    "used_by": [
+    "01-research/interaction-teardown",
     "03-ux-design/states-and-errors"
    ]
   },
@@ -3465,6 +3899,7 @@
    "desc": "Specify one micro-interaction completely: trigger, rules, feedback, loops, and modes. Use when handing a single interaction to engineering. For motion craft alone use `animation-principles`; for multi-state components u",
    "stage": "03-ux-design",
    "used_by": [
+    "01-research/interaction-teardown",
     "04-ui-design/motion"
    ]
   },
@@ -3930,7 +4365,8 @@
    "desc": "Read financials, map competitive landscapes, and argue design decisions in the language of value. Use when defending design to commercial stakeholders. For the live negotiation itself, use `design-negotiation` (designer-",
    "stage": "02-ideation",
    "used_by": [
-    "02-ideation/assumptions-and-bets"
+    "02-ideation/assumptions-and-bets",
+    "09-workflow-tooling/client-presentation"
    ]
   },
   {
@@ -3942,7 +4378,8 @@
    "desc": "Compare UX patterns, features, strengths, and gaps across rival products. Use when you need to know what others actually do. For deliberately adopting their conventions, use `jakobs-law` (interaction-design).",
    "stage": "02-ideation",
    "used_by": [
-    "01-research/competitive-scan"
+    "01-research/competitive-scan",
+    "01-research/interaction-teardown"
    ]
   },
   {
@@ -3966,7 +4403,8 @@
    "desc": "Write a project brief: problem space, constraints, audience, and success criteria. Use at kickoff for one specific project. For long-horizon aspiration use `north-star-vision`; for reusable decision rules use `design-pr",
    "stage": "02-ideation",
    "used_by": [
-    "00-governance/intake-brief"
+    "00-governance/intake-brief",
+    "06-design-critique/brief-traceability"
    ]
   },
   {
@@ -3990,7 +4428,8 @@
    "desc": "Map the full ecosystem of touchpoints, channels, and relationships across a service. Use when the experience spans more than one product. For one persona's linear journey use `journey-map` (design-research); for backstag",
    "stage": "02-ideation",
    "used_by": [
-    "01-research/journey-map"
+    "01-research/journey-map",
+    "03-ux-design/platform-map"
    ]
   },
   {
@@ -4002,6 +4441,7 @@
    "desc": "Design content structure, hierarchy, labelling, and the navigation model. Use when organising what exists. For the UI that exposes it use `navigation-patterns` (interaction-design); for user-generated grouping evidence u",
    "stage": "03-ux-design",
    "used_by": [
+    "03-ux-design/platform-map",
     "03-ux-design/information-architecture"
    ]
   },
@@ -4051,7 +4491,9 @@
    "desc": "Map service delivery across frontstage actions, backstage processes, and supporting systems. Use when staff and operations are part of the experience. For the customer-visible layer only, use `experience-map`.",
    "stage": "02-ideation",
    "used_by": [
-    "01-research/journey-map"
+    "01-research/journey-map",
+    "03-ux-design/platform-map",
+    "03-ux-design/feature-placement"
    ]
   },
   {
@@ -4854,7 +5296,9 @@
    "url": "https://github.com/Owl-Listener/ux-pgm-skills/blob/main/delivery-execution/skills/launch-readiness/SKILL.md",
    "desc": "Run a launch or readiness review against exit criteria.",
    "stage": "09-workflow-tooling",
-   "used_by": []
+   "used_by": [
+    "06-design-critique/brief-traceability"
+   ]
   },
   {
    "key": "ux-pgm-skills/delivery-execution/retrospective",
@@ -4874,7 +5318,9 @@
    "url": "https://github.com/Owl-Listener/ux-pgm-skills/blob/main/delivery-execution/skills/risk-register/SKILL.md",
    "desc": "Build and maintain a program risk register.",
    "stage": "09-workflow-tooling",
-   "used_by": []
+   "used_by": [
+    "03-ux-design/feature-placement"
+   ]
   },
   {
    "key": "ux-pgm-skills/measurement-ops/designops-metrics",
@@ -4994,7 +5440,9 @@
    "url": "https://github.com/Owl-Listener/ux-pgm-skills/blob/main/program-planning/skills/dependency-map/SKILL.md",
    "desc": "Map cross-team dependencies and the critical path for a design program.",
    "stage": "09-workflow-tooling",
-   "used_by": []
+   "used_by": [
+    "03-ux-design/feature-placement"
+   ]
   },
   {
    "key": "ux-pgm-skills/program-planning/prioritisation-framework",
@@ -5025,7 +5473,8 @@
    "desc": "Scope a program into phases with explicit in-scope and out-of-scope boundaries.",
    "stage": "09-workflow-tooling",
    "used_by": [
-    "00-governance/intake-brief"
+    "00-governance/intake-brief",
+    "06-design-critique/brief-traceability"
    ]
   },
   {
@@ -5056,7 +5505,9 @@
    "url": "https://github.com/Owl-Listener/ux-pgm-skills/blob/main/stakeholder-comms/skills/executive-update/SKILL.md",
    "desc": "Craft a concise executive update tied to business outcomes.",
    "stage": "09-workflow-tooling",
-   "used_by": []
+   "used_by": [
+    "09-workflow-tooling/client-presentation"
+   ]
   },
   {
    "key": "ux-pgm-skills/stakeholder-comms/stakeholder-map",
@@ -5129,7 +5580,8 @@
    "desc": "Proactively identifying failure modes, misuse, and unintended consequences.",
    "stage": "03-ux-design",
    "used_by": [
-    "00-governance/ai-output-check"
+    "00-governance/ai-output-check",
+    "03-ux-design/feature-placement"
    ]
   },
   {
@@ -5561,6 +6013,8 @@
    "desc": "Techniques for defining the product's objects, relationships, states, and vocabulary independently of any interface: the most load-bearing layer",
    "stage": "00-governance",
    "used_by": [
+    "03-ux-design/platform-map",
+    "03-ux-design/feature-placement",
     "03-ux-design/conceptual-model"
    ]
   },
@@ -5573,7 +6027,8 @@
    "desc": "Techniques for mapping a domain's concepts, terminology conflicts, and bounded contexts: the raw material the conceptual model is built from",
    "stage": "00-governance",
    "used_by": [
-    "01-research/domain-glossary"
+    "01-research/domain-glossary",
+    "03-ux-design/platform-map"
    ]
   },
   {
@@ -5645,6 +6100,7 @@
    "desc": "Techniques for auditing and deciding the surface against the layers below: vocabulary, object consistency, completeness, feedback, hierarchy, accessibility",
    "stage": "00-governance",
    "used_by": [
+    "06-design-critique/brief-traceability",
     "06-design-critique/coherence-check"
    ]
   },

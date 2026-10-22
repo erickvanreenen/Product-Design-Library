@@ -21,7 +21,8 @@ Needs only a short brief: the decision the research serves and by when. Existing
 | 5 | [Build inclusive personas](skills/inclusive-personas.md) | 1 | The team needs a shared reference for who it designs for; "create personas"; before UX work on a product with several user types. |
 | 6 | [Map the journey](skills/journey-map.md) | 1 | Improving an existing experience; "map the journey", "where does it go wrong end to end"; an experience spans several channels or involves staff. |
 | 7 | [Scan the competition](skills/competitive-scan.md) | 1 | Entering a market or redesigning a known pattern; "what do others do", "benchmark this". |
-| 8 | [Map the domain and glossary](skills/domain-glossary.md) | 1 | The domain is complex or unfamiliar; teams or users use different words for the same thing; before the conceptual model. |
+| 8 | [Tear down competitor interactions](skills/interaction-teardown.md) | 1 | Benchmarking how others handle a flow in detail; "how do the best apps do this", "break down their interactions", "macro and micro interactions"; step 4 of erick_process. |
+| 9 | [Map the domain and glossary](skills/domain-glossary.md) | 1 | The domain is complex or unfamiliar; teams or users use different words for the same thing; before the conceptual model. |
 
 ## Gate checklist: G1 Evidence (Research)
 

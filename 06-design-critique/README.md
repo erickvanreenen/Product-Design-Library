@@ -14,11 +14,12 @@ Needs only the screen or flow, plus the goal it serves. Principles and DESIGN.md
 
 | # | Skill | Step | Use when |
 |---|---|---|---|
-| 1 | [Critique a screen](skills/critique-screen.md) | 7 | A screen, mockup or screenshot needs review; "what is wrong with this screen", "review this design", "why does this feel off"; after compose-screen. |
-| 2 | [Run a heuristic review](skills/heuristic-review.md) | 7 | Reviewing a flow or product for usability before testing; "do a heuristic evaluation", "expert review"; reviewing an AI feature. |
-| 3 | [Check coherence with the layers below](skills/coherence-check.md) | 7 | After screens exist; "the UI is fine but something is off", "are we consistent"; before handoff; when surface fixes keep coming back. |
-| 4 | [Check for AI slop](skills/slop-check.md) | 7 | Any AI-written copy or AI-generated UI is about to ship or be reviewed; "this sounds like AI", "this looks generic", "clean up this copy". |
-| 5 | [Run a critique session](skills/critique-session.md) | 7 | Work needs feedback from people (team, stakeholders, cross-team); "set up a crit", "how do we review this together". |
+| 1 | [Check the design against the brief](skills/brief-traceability.md) | 7 | A design or prototype is close to done; "does this answer the brief", "have we missed anything"; before critique and before client presentation; step 12 of erick_process. |
+| 2 | [Critique a screen](skills/critique-screen.md) | 7 | A screen, mockup or screenshot needs review; "what is wrong with this screen", "review this design", "why does this feel off"; after compose-screen. |
+| 3 | [Run a heuristic review](skills/heuristic-review.md) | 7 | Reviewing a flow or product for usability before testing; "do a heuristic evaluation", "expert review"; reviewing an AI feature. |
+| 4 | [Check coherence with the layers below](skills/coherence-check.md) | 7 | After screens exist; "the UI is fine but something is off", "are we consistent"; before handoff; when surface fixes keep coming back. |
+| 5 | [Check for AI slop](skills/slop-check.md) | 7 | Any AI-written copy or AI-generated UI is about to ship or be reviewed; "this sounds like AI", "this looks generic", "clean up this copy". |
+| 6 | [Run a critique session](skills/critique-session.md) | 7 | Work needs feedback from people (team, stakeholders, cross-team); "set up a crit", "how do we review this together". |
 
 ## Gate checklist: G7 Fixes (Critique)
 

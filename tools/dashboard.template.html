@@ -137,8 +137,8 @@ const DATA = /*DATA*/;
   const skills = DATA.skills, originals = DATA.originals, repos = DATA.repos;
   const posts = Object.fromEntries(DATA.posts.map((p) => [p.id, p]));
   const orig = Object.fromEntries(originals.map((o) => [o.key, o]));
-  const VIEWS = [["stages", "By stage"], ["pipeline", "Run a brief"], ["sources", "By source"], ["backlog", "Not yet read"]];
-  const state = { view: "stages", sel: null, q: "" };
+  const VIEWS = [["ninja", "Erick\u2019s ninja playbook"], ["stages", "By stage"], ["pipeline", "Run a brief"], ["sources", "By source"], ["backlog", "Not yet read"]];
+  const state = { view: "ninja", sel: null, q: "" };
 
   function el(tag, props) {
     const e = document.createElement(tag);
@@ -271,6 +271,24 @@ const DATA = /*DATA*/;
     p.append(el("h4", { text: "Support at any time" }), el("div", { class: "chips" }, skillsIn(w.id).map((k) => el("button", { class: "chip", type: "button", text: k.name, onclick: () => go("stages", w.id) }))));
   }
 
+  function ninjaPanel(p) {
+    p.append(el("div", { class: "phead" }, el("h2", { text: "Erick\u2019s ninja playbook" }),
+      el("div", { class: "muted", text: "Erick\u2019s own process, in his order, with the library underneath every step. Start from the whole platform, not the screen. The AI drafts and checks; Erick decides at every checkpoint. Full playbook: playbooks/Erick_ninja_playbook.md." })));
+    const pipe = el("div", { class: "pipe" });
+    const all = DATA.ninja.flatMap((ph) => ph.steps.map((s, i) => ({ ph: ph, s: s, last: i === ph.steps.length - 1 })));
+    let lastPhase = null;
+    all.forEach((row, i) => {
+      if (row.ph.phase !== lastPhase) { pipe.append(el("h4", { text: row.ph.phase, style: "margin:14px 0 8px" })); lastPhase = row.ph.phase; }
+      const [n, title, ids, out] = row.s;
+      const ks = ids.map((id) => skills.find((k) => k.id === id)).filter(Boolean);
+      pipe.append(el("div", { class: "pstep" }, el("div", { class: "prail" }, el("span", { class: "pdot", text: String(n) }), i < all.length - 1 ? el("span", { class: "pline" }) : null),
+        el("div", { class: "pbody" }, el("div", { class: "ntitle", text: title }), el("div", { class: "nsub" }, "Produces ", el("code", { text: out })),
+          el("div", { class: "chips" }, ks.map((k) => el("button", { class: "chip", type: "button", text: k.name, onclick: () => go("stages", k.stage) }))),
+          row.last && row.ph.checkpoint ? el("span", { class: "gate", text: "Checkpoint " + row.ph.checkpoint }) : null)));
+    });
+    p.append(pipe);
+  }
+
   function backlogPanel(p) {
     p.append(el("div", { class: "phead" }, el("h2", { text: "Not yet read" }), el("div", { class: "muted", text: "Links from the chat export still to open. Add useful ones with 09-workflow-tooling/skills/write-a-skill.md." })));
     const ul = el("ul", { class: "list" });
@@ -304,6 +322,7 @@ const DATA = /*DATA*/;
     const q = state.q.trim().toLowerCase();
     if (q) return search(p, q);
     if (state.view === "pipeline") return pipelinePanel(p);
+    if (state.view === "ninja") return ninjaPanel(p);
     if (state.view === "backlog") return backlogPanel(p);
     if (!state.sel) return overview(p);
     if (state.view === "stages") return stagePanel(p, state.sel);
@@ -311,7 +330,7 @@ const DATA = /*DATA*/;
   }
 
   function setHash() {
-    const token = state.sel || (state.view !== "stages" ? state.view : "");
+    const token = state.sel || (state.view !== "ninja" ? state.view : "");
     try { history.replaceState(null, "", token ? "#" + token : location.pathname + location.search); } catch (e) {}
   }
   function go(view, sel) { state.view = view; state.sel = sel; setHash(); render(); scrollPanel(); }
